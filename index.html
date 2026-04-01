@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Үйлену тойына шақыру | Бақдәулет &amp; Жәмила</title>
+    <title>Үйлену тойына шақыру | Бақдәулет &amp; Жамила</title>
     <meta name="description" content="31 мамыр 2026 өтетін үйлену тойына арналған заманауи қазақша шақыру сайты.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,12 +308,14 @@
         .section-tag {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             margin-bottom: 12px;
             letter-spacing: 0.28em;
             text-transform: uppercase;
             font-size: 0.72rem;
             color: var(--gold);
+            width: 100%;
         }
 
         .section-tag::before,
@@ -361,7 +363,7 @@
         .music-button {
             position: fixed;
             right: 16px;
-            bottom: 16px;
+            bottom: max(16px, env(safe-area-inset-bottom, 0px) + 12px);
             z-index: 30;
             display: inline-flex;
             align-items: center;
@@ -499,7 +501,7 @@
         }
 
         .countdown-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .count-card {
@@ -766,7 +768,7 @@
             }
 
             .countdown-grid {
-                grid-template-columns: repeat(4, minmax(0, 1fr));
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
@@ -841,10 +843,18 @@
             }
 
             .music-button {
-                right: 12px;
-                bottom: 12px;
-                min-height: 46px;
-                padding: 0 14px;
+                right: 8px;
+                bottom: max(10px, env(safe-area-inset-bottom, 0px) + 8px);
+                min-height: 38px;
+                padding: 0 10px;
+                gap: 6px;
+                font-size: 0.8rem;
+                opacity: 0.92;
+            }
+
+            .music-dot {
+                width: 8px;
+                height: 8px;
             }
 
             .count-label {
@@ -882,7 +892,7 @@
 <body>
     <header class="hero" id="top">
         <nav class="topbar">
-            <a class="brand" href="#top">Бақдәулет &amp; Жәмила</a>
+            <a class="brand" href="#top">Бақдәулет &amp; Жамила</a>
             <div class="top-links">
                 <a href="#invitation">Шақыру</a>
                 <a href="#details">Ақпарат</a>
@@ -974,7 +984,7 @@
                     </div>
                     <h3>Мейрамхана</h3>
                     <p>«Шапағат» мейрамханасы</p>
-                    <p>Бауыржан Момышұлы ауылы </p>
+                    <p>Бауыржан Момышұлы ауылы,<br/> Жiбек жолы көшесi 5Б </p>
                 </article>
             </div>
         </section>
@@ -997,10 +1007,6 @@
                 <article class="count-card">
                     <span class="count-number" id="minutes">00</span>
                     <div class="count-label">Минут</div>
-                </article>
-                <article class="count-card">
-                    <span class="count-number" id="seconds">00</span>
-                    <div class="count-label">Секунд</div>
                 </article>
             </div>
         </section>
@@ -1111,6 +1117,7 @@
                                 <option value="2">2 адам</option>
                                 <option value="3">3 адам</option>
                                 <option value="4">4 адам</option>
+                                <option value="4">6 адамнан коп</option>
                             </select>
                         </div>
 
@@ -1132,8 +1139,7 @@
         const countdownElements = {
             days: document.getElementById("days"),
             hours: document.getElementById("hours"),
-            minutes: document.getElementById("minutes"),
-            seconds: document.getElementById("seconds")
+            minutes: document.getElementById("minutes")
         };
 
         function updateCountdown() {
@@ -1150,12 +1156,10 @@
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((distance / (1000 * 60)) % 60);
-            const seconds = Math.floor((distance / 1000) % 60);
 
             countdownElements.days.textContent = String(days).padStart(2, "0");
             countdownElements.hours.textContent = String(hours).padStart(2, "0");
             countdownElements.minutes.textContent = String(minutes).padStart(2, "0");
-            countdownElements.seconds.textContent = String(seconds).padStart(2, "0");
         }
 
         updateCountdown();
